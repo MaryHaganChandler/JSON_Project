@@ -8,6 +8,7 @@ eq_data = json.load(infile)
     #json.load() takes our json file and converts it into a Python object, and eq_data
     #   becomes a dictionary. We haven't fixed the format yet.
 
+
 json.dump(eq_data, outfile, indent = 4)
     #To help us be in a more readable format
     #Three arguments: our object, the outfile, and how many indents we want in the file
