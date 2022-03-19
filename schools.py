@@ -60,6 +60,7 @@ while map_1_index < list_length:
             grad_rate_women.append(grad)
 
         if univ_data[map_2_index]["Percent of total enrollment that are Black or African American (DRVEF2020)"] > 10:
+            #print(type(univ_data[map_2_index]["Percent of total enrollment that are Black or African American (DRVEF2020)"]))
             univs = univ_data[map_2_index]["instnm"]
             lon = univ_data[map_2_index]["Longitude location of institution (HD2020)"]
             lat = univ_data[map_2_index]["Latitude location of institution (HD2020)"]
@@ -69,7 +70,20 @@ while map_1_index < list_length:
             lons2.append(lon)
             lats2.append(lat)
             black_aa_enroll.append(enroll)
+
+        if univ_data[map_3_index]["Total price for in-state students living off campus (not with family)  2020-21 (DRVIC2020)"] > 50000:
+            univs = univ_data[map_3_index]["instnm"]
+            print(univs)
             
+            lon = univ_data[map_3_index]["Longitude location of institution (HD2020)"]
+            lat = univ_data[map_3_index]["Latitude location of institution (HD2020)"]
+            price = univ_data[map_3_index]["Total price for in-state students living off campus (not with family)  2020-21 (DRVIC2020)"]
+
+            list_of_univs3.append(univs)
+            lons3.append(lon)
+            lats3.append(lat)
+            total_price_instate.append(price)
+    
     map_1_index += 1
     map_2_index += 1
     map_3_index += 1
@@ -84,7 +98,7 @@ while map_1_index < list_length:
 #print()
 #print(list_of_univs2)
 #print(black_aa_enroll)
-
+#print(total_price_instate)
 
 
 
@@ -93,7 +107,7 @@ from plotly.graph_objs import Scattergeo, Layout
 from plotly import offline
 
 
-"""--------MAP 2--------"""
+"""--------MAP 1--------"""
 map_1_data = [
     {"type":"scattergeo",
     "lon":lons1,
@@ -124,7 +138,7 @@ map_2_data = [
     "lat":lats2,
     "text":list_of_univs2,
     "marker": {
-        "size":[1*enroll for enroll in black_aa_enroll],
+        "size":[2*enroll for enroll in black_aa_enroll],
         "color":black_aa_enroll,
         "colorscale":"magenta",
         "colorbar":{"title":"Percentage of Total Enrollment"},
@@ -136,3 +150,28 @@ map_2_layout = Layout(title = "Black and African American Enrollment - Above 10%
 fig = {"data":map_2_data, "layout": map_2_layout}
 
 offline.plot(fig, filename = "Black_And_African_American_Enrollment.html")
+
+
+
+
+
+
+"""--------MAP 3--------"""
+map_3_data = [
+    {"type":"scattergeo",
+    "lon":lons3,
+    "lat":lats3,
+    "text":list_of_univs3,
+    "marker": {
+        "size":[1*price for price in total_price_instate],
+        "color":total_price_instate,
+        "colorscale":"magenta",
+        "colorbar":{"title":"Cost of Living"},
+    },
+    }]
+
+map_3_layout = Layout(title = "In-State, Off-Campus Student Cost of Living - Above $50,000")
+
+fig = {"data":map_3_data, "layout": map_3_layout}
+
+offline.plot(fig, filename = "Off_Campus_Price_Above_50000.html")
