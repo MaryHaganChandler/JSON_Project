@@ -36,7 +36,7 @@ print(mags[:10])
 print(lons[:10])
 print(lats[:10])
 
-"""
+
 from plotly.graph_objs import Scattergeo, Layout
 from plotly import offline
 
@@ -68,5 +68,3 @@ fig = {'data':data, 'layout':my_layout}
     #We're creating a dictionary called fig, and we're giving it two keys: data and layout
 
 offline.plot(fig, filename = "global_earthquakes.html")
-
-"""
