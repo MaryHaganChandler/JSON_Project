@@ -70,7 +70,7 @@ while map_1_index < list_length:
             lons2.append(lon)
             lats2.append(lat)
             black_aa_enroll.append(enroll)
-
+        """
         if univ_data[map_3_index]["Total price for in-state students living off campus (not with family)  2020-21 (DRVIC2020)"] > 50000:
             univs = univ_data[map_3_index]["instnm"]
             print(univs)
@@ -83,7 +83,7 @@ while map_1_index < list_length:
             lons3.append(lon)
             lats3.append(lat)
             total_price_instate.append(price)
-    
+        """
     map_1_index += 1
     map_2_index += 1
     map_3_index += 1
