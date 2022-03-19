@@ -42,29 +42,46 @@ list_length = len(univ_data)
 map_1_index = 0
 while map_1_index < list_length:
     if univ_data[map_1_index]["NCAA"]["NAIA conference number football (IC2020)"] in relevant_conferences:
-        univs = univ_data[map_1_index]["instnm"]
-        lon = univ_data[map_1_index]["Longitude location of institution (HD2020)"]
-        lat = univ_data[map_1_index]["Latitude location of institution (HD2020)"]
-        grad = univ_data[map_1_index]["Graduation rate  women (DRVGR2020)"]
+        if univ_data[map_1_index]["Graduation rate  women (DRVGR2020)"] > 50:
+            univs = univ_data[map_1_index]["instnm"]
+            lon = univ_data[map_1_index]["Longitude location of institution (HD2020)"]
+            lat = univ_data[map_1_index]["Latitude location of institution (HD2020)"]
+            grad = univ_data[map_1_index]["Graduation rate  women (DRVGR2020)"]
 
-        list_of_univs.append(univs)
-        lons.append(lon)
-        lats.append(lat)
-        grad_rate_women.append(grad)
+            list_of_univs.append(univs)
+            lons.append(lon)
+            lats.append(lat)
+            grad_rate_women.append(grad)
 
     map_1_index += 1
 
-print(list_of_univs)
-print(lons)
-print()
-print(lats)
-print(grad_rate_women)
-
+#print(list_of_univs)
+#print(lons)
+#print()
+#print(lats)
+#print(grad_rate_women)
 
 
 from plotly.graph_objs import Scattergeo, Layout
 from plotly import offline
 
+map_1_data = [
+    {"type":"scattergeo",
+    "lon":lons,
+    "lat":lats,
+    "text":list_of_univs,
+    "marker": {
+        "size":[0.2*grad for grad in grad_rate_women],
+        "color":grad_rate_women,
+        "colorscale":"viridis",
+        "colorbar":{"title":"Percentage"},
+    },
+    }]
+
+
+
+
+"""
 map_1_data = [
     {"type":"scattergeo",
     "lon":lons,
@@ -78,7 +95,7 @@ map_1_data = [
         "colorbar":{"title":"Percentage"},
     },
     }]
-
+"""
 
 map_1_layout = Layout(title = "Graduation Rate for Women - Above 50%")
 
