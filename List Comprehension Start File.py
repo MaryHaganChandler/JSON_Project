@@ -21,7 +21,7 @@ for i in old_list:
 # new_list = [expression(i) for i in old_list if filter(i)]
 
 
-#The list comprehension starts with a '[' and ']', to help you remember that the
+#The list comprehension starts and ends with '[' and ']' to help you remember that the
 #result is going to be a list.
 
 # [ expression for item in list if conditional ]
@@ -37,14 +37,31 @@ for i in old_list:
 
 #Which corresponds to:
 
-#*result*  = [*transform*    *iteration*         *filter*     ]
+#*result*  = [*transform*        *iteration*        *filter*     ]
 
 #The filter part answers the question if the item should be transformed. '''
+    #Classic way:
+old_list = [1,2,3,4,5]
+new_list = []
+
+for i in old_list:
+    i = i**2
+    new_list.append(i)
+
+
+    #Using list comprehension:
+old_list = [1,2,3,4,5]
+new_list = []
+new_list = [i**2 for i in old_list]
+print(new_list)
+
+
+
 
 #1) creating a simple list of 10 numbers using Range()
-list = [x for x in range(10)]   #Check, did this on my own
-print(list)                     #Check
-
+x = [i for i in range(10)]      #You don't have to have a list to begin with,
+                                #   you can create one with the range() function
+print(x)
 # Output -[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 
@@ -64,9 +81,8 @@ print(squares)
 list1 = [3,4,5]
 multiplied = [item*3 for item in list1]
 print(multiplied)
-
-
 #[9,12,15]
+
 
 
 
@@ -74,17 +90,14 @@ print(multiplied)
 listOfWords = ["this","is","a","list","of","words"]
 items = [x[0] for x in listOfWords]
 print(items)
-
-
 # Output - ['t', 'i', 'a', 'l', 'o', 'w']
 
 
 
 # 5) Let's show how easy you can convert lower case / upper case letters.
-lower = [x.lower() for x in ["A","B","B"]]
+lower = [x.lower() for x in ["A","B","C"]]
 print(lower)
 #Output 1 - ['a', 'b', 'c']
-
 
 upper = [x.upper() for x in lower]
 print(upper)
@@ -102,9 +115,11 @@ print(new_range)
 string = "Hello 12345 World"
 numbers = [i for i in string if i.isdigit()]
 print(numbers)
-
 # Output - ['1', '2', '3', '4', '5']
 
+alpha = [i for i in string if i.isalpha]
+print(alpha)
+# Output - just letters
 
 
 
@@ -137,37 +152,21 @@ print(result)
 def double(x):
     return x*2
 
-
 # If you now just print that function with a value in it, it should look like this:
 print(double(10))
-
-
 # Answer - 20
-output = [double(x) for x in range(10)]
-print(output)
 
 #We can easily use list comprehension on that function.
-
-
-
-
-
+output = [double(x) for x in range(10)]
+print(output)
 # Output - [0, 2, 4, 6, 8, 10, 12, 14, 16, 18]
 
 
 
-
-
-
 # 10) adding an IF condition to the above
-
-
-
-
-
+output = [double(x) for x in range(10) if x % 2 == 0]
+print(output)
 # Output - [0, 4, 8, 12, 16]
-
-
 
 
 
